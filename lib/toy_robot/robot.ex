@@ -36,6 +36,7 @@ defmodule ToyRobot.Robot do
   def move(robot = %__MODULE__{facing: :west, position: {x, y}}),
     do: %{robot | position: {x, y - 1}}
 
+  def left(robot = %__MODULE__{placed: false}), do: robot
   def left(robot = %__MODULE__{facing: :north}), do: %{robot | facing: :west}
   def left(robot = %__MODULE__{facing: :south}), do: %{robot | facing: :east}
   def left(robot = %__MODULE__{facing: :east}), do: %{robot | facing: :north}

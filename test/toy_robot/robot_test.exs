@@ -81,28 +81,32 @@ defmodule RobotTest do
                placed: true
              }
     end
-  end
 
-  test "left/1" do
-    assert Robot.left(%Robot{position: {0, 0}, facing: :north}) == %Robot{
-             position: {0, 0},
-             facing: :west
-           }
+    test "left/1" do
+      assert Robot.left(%Robot{position: {0, 0}, facing: :north, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :west,
+               placed: true
+             }
 
-    assert Robot.left(%Robot{position: {0, 0}, facing: :south}) == %Robot{
-             position: {0, 0},
-             facing: :east
-           }
+      assert Robot.left(%Robot{position: {0, 0}, facing: :south, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :east,
+               placed: true
+             }
 
-    assert Robot.left(%Robot{position: {0, 0}, facing: :east}) == %Robot{
-             position: {0, 0},
-             facing: :north
-           }
+      assert Robot.left(%Robot{position: {0, 0}, facing: :east, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :north,
+               placed: true
+             }
 
-    assert Robot.left(%Robot{position: {0, 0}, facing: :west}) == %Robot{
-             position: {0, 0},
-             facing: :south
-           }
+      assert Robot.left(%Robot{position: {0, 0}, facing: :west, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :south,
+               placed: true
+             }
+    end
   end
 
   test "right/1" do
