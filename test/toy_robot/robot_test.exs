@@ -20,6 +20,11 @@ defmodule RobotTest do
       unplaced_robot = %Robot{position: {0, 0}, facing: :north, placed: false}
       assert Robot.move(unplaced_robot) == unplaced_robot
     end
+
+    test "right/1" do
+      unplaced_robot = %Robot{position: {0, 0}, facing: :north, placed: false}
+      assert Robot.right(unplaced_robot) == unplaced_robot
+    end
   end
 
   describe "after a valid place command" do
@@ -107,27 +112,31 @@ defmodule RobotTest do
                placed: true
              }
     end
-  end
 
-  test "right/1" do
-    assert Robot.right(%Robot{position: {0, 0}, facing: :north}) == %Robot{
-             position: {0, 0},
-             facing: :east
-           }
+    test "right/1" do
+      assert Robot.right(%Robot{position: {0, 0}, facing: :north, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :east,
+               placed: true
+             }
 
-    assert Robot.right(%Robot{position: {0, 0}, facing: :south}) == %Robot{
-             position: {0, 0},
-             facing: :west
-           }
+      assert Robot.right(%Robot{position: {0, 0}, facing: :south, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :west,
+               placed: true
+             }
 
-    assert Robot.right(%Robot{position: {0, 0}, facing: :east}) == %Robot{
-             position: {0, 0},
-             facing: :south
-           }
+      assert Robot.right(%Robot{position: {0, 0}, facing: :east, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :south,
+               placed: true
+             }
 
-    assert Robot.right(%Robot{position: {0, 0}, facing: :west}) == %Robot{
-             position: {0, 0},
-             facing: :north
-           }
+      assert Robot.right(%Robot{position: {0, 0}, facing: :west, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :north,
+               placed: true
+             }
+    end
   end
 end
