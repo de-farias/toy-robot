@@ -1,8 +1,8 @@
 defmodule ToyRobot.Robot do
-  defstruct [:position, :facing]
+  defstruct [:position, :facing, placed: false]
 
   def place(x, y, facing) do
-    %__MODULE__{position: {x, y}, facing: facing}
+    %__MODULE__{position: {x, y}, facing: facing, placed: true}
   end
 
   def report(%__MODULE__{} = robot) do

@@ -4,10 +4,10 @@ defmodule RobotTest do
   alias ToyRobot.Robot
 
   test "place/3" do
-    assert Robot.place(0, 0, :north) == %Robot{position: {0, 0}, facing: :north}
-    assert Robot.place(0, 1, :south) == %Robot{position: {0, 1}, facing: :south}
-    assert Robot.place(1, 1, :east) == %Robot{position: {1, 1}, facing: :east}
-    assert Robot.place(2, 1, :west) == %Robot{position: {2, 1}, facing: :west}
+    assert Robot.place(0, 0, :north) == %Robot{position: {0, 0}, facing: :north, placed: true}
+    assert Robot.place(0, 1, :south) == %Robot{position: {0, 1}, facing: :south, placed: true}
+    assert Robot.place(1, 1, :east) == %Robot{position: {1, 1}, facing: :east, placed: true}
+    assert Robot.place(2, 1, :west) == %Robot{position: {2, 1}, facing: :west, placed: true}
   end
 
   test "report/1" do
