@@ -10,11 +10,20 @@ defmodule RobotTest do
     assert Robot.place(2, 1, :west) == %Robot{position: {2, 1}, facing: :west, placed: true}
   end
 
-  test "report/1" do
-    assert Robot.report(%Robot{position: {0, 0}, facing: :north}) == "0,0,NORTH"
-    assert Robot.report(%Robot{position: {0, 1}, facing: :south}) == "0,1,SOUTH"
-    assert Robot.report(%Robot{position: {1, 1}, facing: :east}) == "1,1,EAST"
-    assert Robot.report(%Robot{position: {2, 1}, facing: :west}) == "2,1,WEST"
+  describe "before a valid place command" do
+    test "report/1" do
+      unplaced_robot = %Robot{position: {0, 0}, facing: :north, placed: false}
+      assert Robot.report(unplaced_robot) == unplaced_robot
+    end
+  end
+
+  describe "after a valid place command" do
+    test "report/1" do
+      assert Robot.report(%Robot{position: {0, 0}, facing: :north, placed: true}) == "0,0,NORTH"
+      assert Robot.report(%Robot{position: {0, 1}, facing: :south, placed: true}) == "0,1,SOUTH"
+      assert Robot.report(%Robot{position: {1, 1}, facing: :east, placed: true}) == "1,1,EAST"
+      assert Robot.report(%Robot{position: {2, 1}, facing: :west, placed: true}) == "2,1,WEST"
+    end
   end
 
   describe "move/1" do

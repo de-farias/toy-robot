@@ -5,7 +5,9 @@ defmodule ToyRobot.Robot do
     %__MODULE__{position: {x, y}, facing: facing, placed: true}
   end
 
-  def report(%__MODULE__{} = robot) do
+  def report(robot = %__MODULE__{placed: false}), do: robot
+
+  def report(robot = %__MODULE__{}) do
     "#{elem(robot.position, 0)},#{elem(robot.position, 1)},#{
       robot.facing
       |> to_string()
