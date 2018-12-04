@@ -9,7 +9,6 @@ defmodule ToyRobot.Robot do
     else
       robot
     end
-
   end
 
   def report(robot = %__MODULE__{placed: false}), do: robot

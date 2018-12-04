@@ -5,10 +5,29 @@ defmodule RobotTest do
 
   describe "place/3" do
     test 'when the coordinates are invalid' do
-      assert Robot.place(-1, 0, :north) == %Robot{position: {-1, 0}, facing: :north, placed: false}
-      assert Robot.place(0, -1, :north) == %Robot{position: {0, -1}, facing: :north, placed: false}
-      assert Robot.place(5, 0, :north) == %Robot{position: {5, 0}, facing: :north, placed: false}
-      assert Robot.place(0, 5, :north) == %Robot{position: {0, 5}, facing: :north, placed: false}
+      assert Robot.place(-1, 0, :north) == %Robot{
+               position: {-1, 0},
+               facing: :north,
+               placed: false
+             }
+
+      assert Robot.place(0, -1, :north) == %Robot{
+               position: {0, -1},
+               facing: :north,
+               placed: false
+             }
+
+      assert Robot.place(5, 0, :north) == %Robot{
+               position: {5, 0},
+               facing: :north,
+               placed: false
+             }
+
+      assert Robot.place(0, 5, :north) == %Robot{
+               position: {0, 5},
+               facing: :north,
+               placed: false
+             }
     end
 
     test 'when the coordinates are valid' do
