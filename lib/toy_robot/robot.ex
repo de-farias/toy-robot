@@ -2,7 +2,14 @@ defmodule ToyRobot.Robot do
   defstruct [:position, :facing, placed: false]
 
   def place(x, y, facing) do
-    %__MODULE__{position: {x, y}, facing: facing, placed: true}
+    robot = %__MODULE__{position: {x, y}, facing: facing}
+
+    if x >= 0 && x < 5 && y >= 0 && y < 5 do
+      %{robot | placed: true}
+    else
+      robot
+    end
+
   end
 
   def report(robot = %__MODULE__{placed: false}), do: robot

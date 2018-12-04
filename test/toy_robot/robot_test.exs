@@ -3,11 +3,20 @@ defmodule RobotTest do
 
   alias ToyRobot.Robot
 
-  test "place/3" do
-    assert Robot.place(0, 0, :north) == %Robot{position: {0, 0}, facing: :north, placed: true}
-    assert Robot.place(0, 1, :south) == %Robot{position: {0, 1}, facing: :south, placed: true}
-    assert Robot.place(1, 1, :east) == %Robot{position: {1, 1}, facing: :east, placed: true}
-    assert Robot.place(2, 1, :west) == %Robot{position: {2, 1}, facing: :west, placed: true}
+  describe "place/3" do
+    test 'when the coordinates are invalid' do
+      assert Robot.place(-1, 0, :north) == %Robot{position: {-1, 0}, facing: :north, placed: false}
+      assert Robot.place(0, -1, :north) == %Robot{position: {0, -1}, facing: :north, placed: false}
+      assert Robot.place(5, 0, :north) == %Robot{position: {5, 0}, facing: :north, placed: false}
+      assert Robot.place(0, 5, :north) == %Robot{position: {0, 5}, facing: :north, placed: false}
+    end
+
+    test 'when the coordinates are valid' do
+      assert Robot.place(0, 0, :north) == %Robot{position: {0, 0}, facing: :north, placed: true}
+      assert Robot.place(0, 1, :south) == %Robot{position: {0, 1}, facing: :south, placed: true}
+      assert Robot.place(1, 1, :east) == %Robot{position: {1, 1}, facing: :east, placed: true}
+      assert Robot.place(2, 1, :west) == %Robot{position: {2, 1}, facing: :west, placed: true}
+    end
   end
 
   describe "before a valid place command" do
