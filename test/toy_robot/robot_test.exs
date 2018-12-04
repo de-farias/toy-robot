@@ -21,6 +21,11 @@ defmodule RobotTest do
       assert Robot.move(unplaced_robot) == unplaced_robot
     end
 
+    test "left/1" do
+      unplaced_robot = %Robot{position: {0, 0}, facing: :north, placed: false}
+      assert Robot.left(unplaced_robot) == unplaced_robot
+    end
+
     test "right/1" do
       unplaced_robot = %Robot{position: {0, 0}, facing: :north, placed: false}
       assert Robot.right(unplaced_robot) == unplaced_robot
