@@ -15,6 +15,7 @@ defmodule ToyRobot.Robot do
     }"
   end
 
+  def move(robot = %__MODULE__{placed: false}), do: robot
   def move(robot = %__MODULE__{facing: :north, position: {4, _y}}), do: robot
 
   def move(robot = %__MODULE__{facing: :north, position: {x, y}}),

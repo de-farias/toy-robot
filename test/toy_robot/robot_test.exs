@@ -15,6 +15,11 @@ defmodule RobotTest do
       unplaced_robot = %Robot{position: {0, 0}, facing: :north, placed: false}
       assert Robot.report(unplaced_robot) == unplaced_robot
     end
+
+    test "move/1" do
+      unplaced_robot = %Robot{position: {0, 0}, facing: :north, placed: false}
+      assert Robot.move(unplaced_robot) == unplaced_robot
+    end
   end
 
   describe "after a valid place command" do
@@ -24,50 +29,56 @@ defmodule RobotTest do
       assert Robot.report(%Robot{position: {1, 1}, facing: :east, placed: true}) == "1,1,EAST"
       assert Robot.report(%Robot{position: {2, 1}, facing: :west, placed: true}) == "2,1,WEST"
     end
-  end
 
-  describe "move/1" do
-    test "normal cases" do
-      assert Robot.move(%Robot{position: {0, 0}, facing: :north}) == %Robot{
-               position: {1, 0},
-               facing: :north
+    test "move/1 when placed in the edges of the board" do
+      assert Robot.move(%Robot{position: {4, 1}, facing: :north, placed: true}) == %Robot{
+               position: {4, 1},
+               facing: :north,
+               placed: true
              }
 
-      assert Robot.move(%Robot{position: {1, 0}, facing: :south}) == %Robot{
-               position: {0, 0},
-               facing: :south
-             }
-
-      assert Robot.move(%Robot{position: {0, 1}, facing: :east}) == %Robot{
+      assert Robot.move(%Robot{position: {0, 2}, facing: :south, placed: true}) == %Robot{
                position: {0, 2},
-               facing: :east
+               facing: :south,
+               placed: true
              }
 
-      assert Robot.move(%Robot{position: {0, 1}, facing: :west}) == %Robot{
-               position: {0, 0},
-               facing: :west
+      assert Robot.move(%Robot{position: {1, 4}, facing: :east, placed: true}) == %Robot{
+               position: {1, 4},
+               facing: :east,
+               placed: true
+             }
+
+      assert Robot.move(%Robot{position: {3, 0}, facing: :west, placed: true}) == %Robot{
+               position: {3, 0},
+               facing: :west,
+               placed: true
              }
     end
 
-    test "when placed on the edges of the board" do
-      assert Robot.move(%Robot{position: {4, 1}, facing: :north}) == %Robot{
-               position: {4, 1},
-               facing: :north
+    test "move/1 when placed in other positons" do
+      assert Robot.move(%Robot{position: {0, 0}, facing: :north, placed: true}) == %Robot{
+               position: {1, 0},
+               facing: :north,
+               placed: true
              }
 
-      assert Robot.move(%Robot{position: {0, 2}, facing: :south}) == %Robot{
+      assert Robot.move(%Robot{position: {1, 0}, facing: :south, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :south,
+               placed: true
+             }
+
+      assert Robot.move(%Robot{position: {0, 1}, facing: :east, placed: true}) == %Robot{
                position: {0, 2},
-               facing: :south
+               facing: :east,
+               placed: true
              }
 
-      assert Robot.move(%Robot{position: {1, 4}, facing: :east}) == %Robot{
-               position: {1, 4},
-               facing: :east
-             }
-
-      assert Robot.move(%Robot{position: {3, 0}, facing: :west}) == %Robot{
-               position: {3, 0},
-               facing: :west
+      assert Robot.move(%Robot{position: {0, 1}, facing: :west, placed: true}) == %Robot{
+               position: {0, 0},
+               facing: :west,
+               placed: true
              }
     end
   end
