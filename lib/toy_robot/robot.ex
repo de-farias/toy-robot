@@ -13,17 +13,25 @@ defmodule ToyRobot.Robot do
     }"
   end
 
+  def move(robot = %__MODULE__{facing: :north, position: {4, _y}}), do: robot
+
   def move(robot = %__MODULE__{facing: :north, position: {x, y}}),
     do: %{robot | position: {x + 1, y}}
+
+  def move(robot = %__MODULE__{facing: :south, position: {0, _y}}), do: robot
 
   def move(robot = %__MODULE__{facing: :south, position: {x, y}}),
     do: %{robot | position: {x - 1, y}}
 
+  def move(robot = %__MODULE__{facing: :east, position: {_x, 4}}), do: robot
+
   def move(robot = %__MODULE__{facing: :east, position: {x, y}}),
-    do: %{robot | position: {x, y - 1}}
+    do: %{robot | position: {x, y + 1}}
+
+  def move(robot = %__MODULE__{facing: :west, position: {_x, 0}}), do: robot
 
   def move(robot = %__MODULE__{facing: :west, position: {x, y}}),
-    do: %{robot | position: {x, y + 1}}
+    do: %{robot | position: {x, y - 1}}
 
   def left(robot = %__MODULE__{facing: :north}), do: %{robot | facing: :west}
   def left(robot = %__MODULE__{facing: :south}), do: %{robot | facing: :east}
@@ -39,8 +47,10 @@ end
 #           N + L -> W
 #           | + R -> E
 #           |
+#           |
 # W -------- -------- E + L -> N
 # + L -> S  |           + R -> S
 # + R -> N  |
+#           |
 #           S + L -> E
 #             + R -> W

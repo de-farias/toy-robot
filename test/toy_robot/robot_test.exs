@@ -17,26 +17,50 @@ defmodule RobotTest do
     assert Robot.report(%Robot{position: {2, 1}, facing: :west}) == "2,1,WEST"
   end
 
-  test "move/1" do
-    assert Robot.move(%Robot{position: {0, 0}, facing: :north}) == %Robot{
-             position: {1, 0},
-             facing: :north
-           }
+  describe "move/1" do
+    test "normal cases" do
+      assert Robot.move(%Robot{position: {0, 0}, facing: :north}) == %Robot{
+               position: {1, 0},
+               facing: :north
+             }
 
-    assert Robot.move(%Robot{position: {1, 0}, facing: :south}) == %Robot{
-             position: {0, 0},
-             facing: :south
-           }
+      assert Robot.move(%Robot{position: {1, 0}, facing: :south}) == %Robot{
+               position: {0, 0},
+               facing: :south
+             }
 
-    assert Robot.move(%Robot{position: {0, 1}, facing: :east}) == %Robot{
-             position: {0, 0},
-             facing: :east
-           }
+      assert Robot.move(%Robot{position: {0, 1}, facing: :east}) == %Robot{
+               position: {0, 2},
+               facing: :east
+             }
 
-    assert Robot.move(%Robot{position: {0, 0}, facing: :west}) == %Robot{
-             position: {0, 1},
-             facing: :west
-           }
+      assert Robot.move(%Robot{position: {0, 1}, facing: :west}) == %Robot{
+               position: {0, 0},
+               facing: :west
+             }
+    end
+
+    test "when placed on the edges of the board" do
+      assert Robot.move(%Robot{position: {4, 1}, facing: :north}) == %Robot{
+               position: {4, 1},
+               facing: :north
+             }
+
+      assert Robot.move(%Robot{position: {0, 2}, facing: :south}) == %Robot{
+               position: {0, 2},
+               facing: :south
+             }
+
+      assert Robot.move(%Robot{position: {1, 4}, facing: :east}) == %Robot{
+               position: {1, 4},
+               facing: :east
+             }
+
+      assert Robot.move(%Robot{position: {3, 0}, facing: :west}) == %Robot{
+               position: {3, 0},
+               facing: :west
+             }
+    end
   end
 
   test "left/1" do
